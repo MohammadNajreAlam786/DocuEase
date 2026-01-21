@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DocuEase</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
+<div class="container">
+
+    <!-- Upload Section -->
+    <section id="uploadSection">
+        <h1>📄 DocuEase</h1>
+        <p class="tagline">AI-powered document understanding</p>
+
+        <input type="file" id="fileInput" accept=".pdf,.txt">
+        <button id="uploadBtn" onclick="uploadDocument()">Upload & Process</button>
+
+        <div id="loader" class="loader hidden">
+            ⏳ Processing document…
+        </div>
+    </section>
+
+    <!-- Summary Section -->
+    <section id="summarySection" class="hidden">
+        <h2>Summary</h2>
+        <p id="summary"></p>
+
+        <h3>Keywords</h3>
+        <div id="keywords" class="keywords"></div>
+
+        <h3>Section-wise Summary</h3>
+        <div id="sections" class="accordion"></div>
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

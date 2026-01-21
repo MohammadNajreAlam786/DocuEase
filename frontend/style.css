@@ -1,0 +1,253 @@
+/* =========================
+   RESET & GLOBAL
+========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: #f5f7fb;
+    color: #1f2937;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode */
+body.dark {
+    background-color: #121826;
+    color: #e5e7eb;
+}
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* =========================
+   UPLOAD SECTION (CENTERED)
+========================= */
+
+#uploadSection {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#uploadSection h1 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+}
+
+.tagline {
+    color: #6b7280;
+    margin-bottom: 30px;
+}
+
+body.dark .tagline {
+    color: #9ca3af;
+}
+
+/* =========================
+   INPUT & BUTTON
+========================= */
+
+input[type="file"] {
+    width: 100%;
+    max-width: 520px;
+    padding: 14px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+body.dark input[type="file"] {
+    background-color: #1f2937;
+    border-color: #374151;
+    color: #e5e7eb;
+}
+
+button {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #4f46e5;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+    background-color: #4338ca;
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+/* =========================
+   LOADER
+========================= */
+
+.loader {
+    margin-top: 15px;
+    font-weight: 600;
+    color: #f59e0b;
+}
+
+/* =========================
+   SUMMARY SECTION
+========================= */
+
+#summarySection {
+    opacity: 0;
+}
+
+#summarySection h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+#summary {
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+/* =========================
+   KEYWORDS
+========================= */
+
+.keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.keywords span {
+    background-color: rgba(79, 70, 229, 0.12);
+    color: #4338ca;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+body.dark .keywords span {
+    background-color: rgba(99, 102, 241, 0.25);
+    color: #c7d2fe;
+}
+
+/* =========================
+   SECTION-WISE ACCORDION
+========================= */
+
+.accordion {
+    margin-top: 20px;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #d1d5db;
+    padding: 12px 0;
+}
+
+body.dark .accordion-item {
+    border-color: #374151;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.accordion-header span {
+    font-size: 20px;
+}
+
+.accordion-header:hover {
+    color: #4f46e5;
+}
+
+.accordion-content {
+    display: none;
+    padding-top: 10px;
+    line-height: 1.7;
+    color: #4b5563;
+}
+
+body.dark .accordion-content {
+    color: #d1d5db;
+}
+
+.accordion-item.active .accordion-content {
+    display: block;
+}
+
+/* =========================
+   THEME TOGGLE
+========================= */
+
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* =========================
+   UTILITIES
+========================= */
+
+.hidden {
+    display: none;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+    #uploadSection h1 {
+        font-size: 2.2rem;
+    }
+
+    input[type="file"] {
+        max-width: 100%;
+    }
+}
+.fade-in {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
