@@ -5,6 +5,5 @@ torch
 sentencepiece
 pdfplumber
 keybert
-sentence-transformers
 langdetect
 python-multipart

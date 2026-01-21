@@ -1,20 +1,19 @@
 from transformers import pipeline
 
-# Cache translators (important for performance)
-TRANSLATORS = {}
+_translator = None
 
 def get_translator(src, tgt):
-    key = f"{src}-{tgt}"
-    if key not in TRANSLATORS:
+    global _translator
+    if _translator is None:
         model_name = f"Helsinki-NLP/opus-mt-{src}-{tgt}"
-        TRANSLATORS[key] = pipeline("translation", model=model_name)
-    return TRANSLATORS[key]
+        _translator = pipeline("translation", model=model_name)
+    return _translator
 
 
 def translate_text(text, src_lang, tgt_lang):
     translator = get_translator(src_lang, tgt_lang)
 
-    chunks = [text[i:i+500] for i in range(0, len(text), 500)]
+    chunks = [text[i:i+400] for i in range(0, len(text), 400)]
     translated = []
 
     for chunk in chunks:

@@ -1,8 +1,0 @@
-fastapi
-uvicorn
-transformers
-torch
-sentencepiece
-pdfplumber
-keybert
-langdetect
