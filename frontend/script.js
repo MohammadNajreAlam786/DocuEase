@@ -1,4 +1,7 @@
-let documentText = "";
+const API_BASE =
+  window.location.hostname.includes("vercel")
+    ? "https://docuease-backend-7oux.onrender.com"
+    : "http://127.0.0.1:8000";
 
 async function uploadDocument() {
     const fileInput = document.getElementById("fileInput");
@@ -22,7 +25,7 @@ async function uploadDocument() {
     formData.append("file", file);
 
     try {
-        const response = await fetch("https://docuease-backend-7oux.onrender.com/upload", {
+        const response = await fetch(`${API_BASE}/upload`, {
             method: "POST",
             body: formData
         });
