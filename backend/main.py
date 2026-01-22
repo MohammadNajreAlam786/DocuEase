@@ -25,6 +25,12 @@ async def upload(file: UploadFile):
     # 1. Extract text
     text = extract_text_from_pdf(file.file)
 
+    # 🚨 HARD LIMIT for free tier (IMPORTANT)
+    MAX_CHARS = 6000
+    if len(text) > MAX_CHARS:
+        text = text[:MAX_CHARS]
+
+
     # 2. Detect language
     original_language = detect_language(text[:1000])
 
@@ -38,10 +44,13 @@ async def upload(file: UploadFile):
     sections = extract_sections(text_en)
 
     # 5. Section-wise summaries (IMPORTANT SECTIONS ONLY)
-    section_summaries_en = summarize_sections(sections)
-
+    #section_summaries_en = summarize_sections(sections)
     # 6. Merge into final academic-style summary
-    final_summary_en = merge_section_summaries(section_summaries_en)
+    #final_summary_en = merge_section_summaries(section_summaries_en)
+    section_summaries_en = {}
+    final_summary_en = merge_section_summaries(
+        {"Document Summary": text_en[:1500]}
+    )
 
     # 7. Translate back if needed
     if original_language != "en":
