@@ -1,21 +1,19 @@
 from keybert import KeyBERT
 
-kw_model = KeyBERT()
+kw_model = KeyBERT(model="all-MiniLM-L6-v2")
 
 def extract_keywords(text):
     keywords = kw_model.extract_keywords(
         text,
-        keyphrase_ngram_range=(1, 2),
-        stop_words="english",
-        top_n=8
+        top_n=8,
+        stop_words="english"
     )
 
-    # Remove duplicates while preserving order
-    seen = set()
-    unique_keywords = []
+    # remove duplicates & normalize
+    unique = []
     for kw, _ in keywords:
-        if kw not in seen:
-            seen.add(kw)
-            unique_keywords.append(kw)
+        kw = kw.lower()
+        if kw not in unique:
+            unique.append(kw)
 
-    return unique_keywords
+    return unique

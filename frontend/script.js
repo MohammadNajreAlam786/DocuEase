@@ -17,7 +17,6 @@ async function uploadDocument() {
     const uploadSection = document.getElementById("uploadSection");
     const summarySection = document.getElementById("summarySection");
 
-    // UI state
     loader.classList.remove("hidden");
     uploadBtn.disabled = true;
 
@@ -30,74 +29,28 @@ async function uploadDocument() {
             body: formData
         });
 
-        if (!response.ok) {
-            throw new Error("Server error");
-        }
+        if (!response.ok) throw new Error("Server error");
 
         const data = await response.json();
 
-        /* =====================
-           SUMMARY
-        ===================== */
-        const summaryEl = document.getElementById("summary");
-        summaryEl.innerText = data.summary || "No summary generated.";
+        // Summary
+        document.getElementById("summary").innerText =
+            data.summary || "No summary generated.";
 
-        /* =====================
-           KEYWORDS
-        ===================== */
+        // Keywords
         const kwDiv = document.getElementById("keywords");
         kwDiv.innerHTML = "";
 
-        (data.keywords || []).forEach(keyword => {
+        (data.keywords || []).forEach(k => {
             const span = document.createElement("span");
-            span.innerText = keyword;
+            span.innerText = k;
             kwDiv.appendChild(span);
         });
 
-        /* =====================
-           SECTION-WISE SUMMARY
-        ===================== */
-        const sectionDiv = document.getElementById("sections");
-        sectionDiv.innerHTML = "";
-
-        const sections = data.section_summaries || {};
-
-        for (const title in sections) {
-            const item = document.createElement("div");
-            item.className = "accordion-item";
-
-            const header = document.createElement("div");
-            header.className = "accordion-header";
-            header.innerHTML = `${title} <span>+</span>`;
-
-            const content = document.createElement("div");
-            content.className = "accordion-content";
-            content.innerText = sections[title];
-
-            header.onclick = () => {
-                item.classList.toggle("active");
-                header.querySelector("span").innerText =
-                    item.classList.contains("active") ? "-" : "+";
-            };
-
-            item.appendChild(header);
-            item.appendChild(content);
-            sectionDiv.appendChild(item);
-        }
-
-        /* =====================
-           VIEW TRANSITION
-        ===================== */
+        // Switch view
         uploadSection.classList.add("hidden");
-
         summarySection.classList.remove("hidden");
-        summarySection.classList.remove("fade-in"); // reset animation
-        void summarySection.offsetWidth;             // force reflow
-        summarySection.classList.add("fade-in");
-        summarySection.style.opacity = "1";
-
         summarySection.scrollIntoView({ behavior: "smooth" });
-
 
     } catch (error) {
         console.error(error);
@@ -108,11 +61,6 @@ async function uploadDocument() {
     }
 }
 
-/* =====================
-   THEME TOGGLE
-===================== */
 function toggleTheme() {
     document.body.classList.toggle("dark");
-    const toggle = document.getElementById("themeToggle");
-    toggle.innerText = document.body.classList.contains("dark") ? "☀️" : "🌙";
 }

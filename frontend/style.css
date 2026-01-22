@@ -116,7 +116,7 @@ button:disabled {
 ========================= */
 
 #summarySection {
-    opacity: 0;
+    padding-top: 80px;
 }
 
 #summarySection h2 {
@@ -127,6 +127,7 @@ button:disabled {
 #summary {
     line-height: 1.8;
     font-size: 1rem;
+    margin-bottom: 25px;
 }
 
 /* =========================
@@ -137,7 +138,6 @@ button:disabled {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 15px;
 }
 
 .keywords span {
@@ -151,55 +151,6 @@ button:disabled {
 body.dark .keywords span {
     background-color: rgba(99, 102, 241, 0.25);
     color: #c7d2fe;
-}
-
-/* =========================
-   SECTION-WISE ACCORDION
-========================= */
-
-.accordion {
-    margin-top: 20px;
-}
-
-.accordion-item {
-    border-bottom: 1px solid #d1d5db;
-    padding: 12px 0;
-}
-
-body.dark .accordion-item {
-    border-color: #374151;
-}
-
-.accordion-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    font-weight: 600;
-    user-select: none;
-}
-
-.accordion-header span {
-    font-size: 20px;
-}
-
-.accordion-header:hover {
-    color: #4f46e5;
-}
-
-.accordion-content {
-    display: none;
-    padding-top: 10px;
-    line-height: 1.7;
-    color: #4b5563;
-}
-
-body.dark .accordion-content {
-    color: #d1d5db;
-}
-
-.accordion-item.active .accordion-content {
-    display: block;
 }
 
 /* =========================
@@ -235,19 +186,5 @@ body.dark .accordion-content {
 
     input[type="file"] {
         max-width: 100%;
-    }
-}
-.fade-in {
-    animation: fadeInUp 0.6s ease-out forwards;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
     }
 }

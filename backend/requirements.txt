@@ -1,20 +1,8 @@
---extra-index-url https://download.pytorch.org/whl/cpu
-
 fastapi
 uvicorn
-
-# NLP / ML
 transformers==4.57.6
-torch==2.10.0+cpu
+torch
 sentencepiece
+pdfplumber
 keybert
 scikit-learn
-
-# PDF processing
-pdfplumber
-
-# Language detection
-langdetect
-
-# FastAPI uploads
-python-multipart
