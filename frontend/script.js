@@ -22,7 +22,7 @@ async function uploadDocument() {
     formData.append("file", file);
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/upload", {
+        const response = await fetch("https://docuease-backend-7oux.onrender.com/upload", {
             method: "POST",
             body: formData
         });
@@ -74,7 +74,7 @@ async function uploadDocument() {
             header.onclick = () => {
                 item.classList.toggle("active");
                 header.querySelector("span").innerText =
-                    item.classList.contains("active") ? "−" : "+";
+                    item.classList.contains("active") ? "-" : "+";
             };
 
             item.appendChild(header);
