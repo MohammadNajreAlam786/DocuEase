@@ -29,6 +29,12 @@ def summarize_sections(sections):
     section_summaries = {}
 
     for title, content in sections.items():
+        title_lower = title.lower()
+
+        # only important sections
+        if not any(k in title_lower for k in IMPORTANT_SECTIONS):
+            continue
+
         if len(content.split()) < 50:
             continue
 
@@ -42,20 +48,3 @@ def summarize_sections(sections):
         section_summaries[title] = result[0]["summary_text"]
 
     return section_summaries
-
-
-def merge_section_summaries(section_summaries):
-    if not section_summaries:
-        return "Document too short to summarize."
-
-    summarizer = get_summarizer()
-    combined = " ".join(section_summaries.values())
-
-    result = summarizer(
-        combined[:2000],
-        max_length=160,
-        min_length=80,
-        do_sample=False
-    )
-
-    return result[0]["summary_text"]
