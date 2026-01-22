@@ -1,15 +1,15 @@
 from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
-from utils import extract_text_from_pdf, extract_sections
+from utils import extract_text_from_pdf
 from keyword_extractor import extract_keywords
-from summarizer import summarize_sections, merge_section_summaries
+from summarizer import get_summarizer
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # allow frontend (Vercel)
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -20,25 +20,24 @@ def health_check():
 
 @app.post("/upload")
 async def upload(file: UploadFile):
-    # 1. Extract text
+    # Extract text
     text = extract_text_from_pdf(file.file)
 
-    # 2. HARD LIMIT (VERY IMPORTANT for Render free tier)
-    text = text[:3000]
+    # HARD LIMIT for Render free tier
+    text = text[:2000]
 
-    # 3. Extract sections
-    sections = extract_sections(text)
+    summarizer = get_summarizer()
+    result = summarizer(
+        text,
+        max_length=140,
+        min_length=70,
+        do_sample=False
+    )
 
-    # 4. Section-wise summaries
-    section_summaries = summarize_sections(sections)
-
-    # 5. Final merged summary
-    final_summary = merge_section_summaries(section_summaries)
-
-    # 6. Keywords from final summary
-    keywords = extract_keywords(final_summary)
+    summary = result[0]["summary_text"]
+    keywords = extract_keywords(summary)
 
     return {
-        "summary": final_summary,
+        "summary": summary,
         "keywords": keywords
     }
