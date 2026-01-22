@@ -3,9 +3,9 @@
 fastapi
 uvicorn
 
-# ML / NLP
+# NLP / ML
 transformers==4.57.6
-torch==2.0.1+cpu
+torch==2.10.0+cpu
 sentencepiece
 keybert
 scikit-learn
@@ -16,5 +16,5 @@ pdfplumber
 # Language detection
 langdetect
 
-# FastAPI upload support
+# FastAPI uploads
 python-multipart
